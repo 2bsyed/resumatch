@@ -1,9 +1,8 @@
 {
-  "env": {
-    "NEXT_PUBLIC_BACKEND_URL": "@backend_url"
-  },
   "rewrites": [
-    { "source": "/api/(.*)", 
-      "destination": "https://your-backend.onrender.com/api/$1" }
+    {
+      "source": "/api/(.*)",
+      "destination": "https://resumatch-backend-t1cu.onrender.com/api/:path*"
+    }
   ]
 }
