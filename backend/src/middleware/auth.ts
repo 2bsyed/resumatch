@@ -2,29 +2,30 @@ import { Request, Response, NextFunction } from 'express';
 import { supabase } from '../db/supabase';
 
 export interface AuthenticatedRequest extends Request {
-  user?: any;
+  user?: {
+    id: string;
+    email: string;
+  };
 }
 
-export async function authMiddleware(req: AuthenticatedRequest, res: Response, next: NextFunction) {
+export const authMiddleware = async (
+  req: AuthenticatedRequest,
+  res: Response,
+  next: NextFunction
+) => {
   const authHeader = req.headers.authorization;
-  if (!authHeader) {
-    return res.status(401).json({ error: 'Unauthorized' });
+  if (!authHeader || !authHeader.startsWith('Bearer ')) {
+    return res.status(401).json({ error: 'Unauthorized: no token provided' });
   }
-
+  
   const token = authHeader.split(' ')[1];
-  if (!token) {
-    return res.status(401).json({ error: 'Unauthorized' });
+  
+  const { data, error } = await supabase.auth.getUser(token);
+  
+  if (error || !data.user) {
+    return res.status(401).json({ error: 'Unauthorized: invalid token' });
   }
-
-  try {
-    const { data: { user }, error } = await supabase.auth.getUser(token);
-    if (error || !user) {
-      return res.status(401).json({ error: 'Unauthorized' });
-    }
-    
-    req.user = user;
-    next();
-  } catch (err) {
-    return res.status(401).json({ error: 'Unauthorized' });
-  }
-}
+  
+  req.user = { id: data.user.id, email: data.user.email! };
+  next();
+};

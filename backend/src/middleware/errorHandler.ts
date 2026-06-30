@@ -1,13 +1,14 @@
 import { Request, Response, NextFunction } from 'express';
 
 export function errorHandler(
-  err: any,
+  err: Error,
   req: Request,
   res: Response,
   next: NextFunction
 ) {
   const isDev = process.env.NODE_ENV === 'development';
-  const status = err.status || err.statusCode || 500;
+  const customErr = err as any;
+  const status = customErr.status || customErr.statusCode || 500;
   
   // Log details
   if (isDev) {
@@ -19,7 +20,7 @@ export function errorHandler(
   // Return structured response
   return res.status(status).json({
     error: err.message || 'Internal Server Error',
-    code: err.code || 'INTERNAL_ERROR',
+    code: customErr.code || 'INTERNAL_ERROR',
     timestamp: new Date().toISOString(),
     ...(isDev && { stack: err.stack })
   });

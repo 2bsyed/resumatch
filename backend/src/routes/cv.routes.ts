@@ -1,5 +1,5 @@
-import { Router } from 'express';
-import multer from 'multer';
+import { Router, Request, Response } from 'express';
+import multer, { FileFilterCallback } from 'multer';
 import { authMiddleware, AuthenticatedRequest } from '../middleware/auth';
 import { supabase } from '../db/supabase';
 import * as extractorService from '../services/extractor.service';
@@ -8,21 +8,24 @@ import rateLimit from 'express-rate-limit';
 
 const router = Router();
 
-// Configure multer with memory storage, size limit of 5MB, and MIME filters
+const storage = multer.memoryStorage();
 const upload = multer({
-  storage: multer.memoryStorage(),
-  limits: { fileSize: 5 * 1024 * 1024 }, // 5MB
-  fileFilter: (req, file, cb) => {
-    const allowedMimeTypes = [
-      'application/pdf',
+  storage,
+  limits: { fileSize: 5 * 1024 * 1024 },
+  fileFilter: (
+    req: Request, 
+    file: Express.Multer.File, 
+    cb: FileFilterCallback
+  ) => {
+    const allowed = [
+      'application/pdf', 
       'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
-      'application/msword',
       'text/plain'
     ];
-    if (allowedMimeTypes.includes(file.mimetype)) {
+    if (allowed.includes(file.mimetype)) {
       cb(null, true);
     } else {
-      cb(new Error('Invalid file type. Only PDF, DOCX, and TXT are allowed.'));
+      cb(new Error('Invalid file type. Only PDF, DOCX, and TXT allowed.'));
     }
   }
 });
@@ -34,12 +37,16 @@ const cvUploadLimiter = rateLimit({
   message: { error: 'Rate limit reached. Please wait before retrying.' },
   standardHeaders: true,
   legacyHeaders: false,
+  validate: { keyGeneratorIpFallback: false },
 });
 
 // TASK 3: Implement POST /api/cv/upload
-router.post('/upload', authMiddleware, cvUploadLimiter, upload.single('file'), async (req: AuthenticatedRequest, res) => {
+router.post('/upload', authMiddleware, cvUploadLimiter, upload.single('file'), async (req: AuthenticatedRequest, res: Response) => {
   try {
-    const userId = req.user.id;
+    const userId = req.user?.id;
+    if (!userId) {
+      return res.status(401).json({ error: 'Unauthorized: missing user context' });
+    }
     let rawText = '';
     
     // Handle file upload OR pasted text (supporting raw_text or pastedText keys)
@@ -115,12 +122,16 @@ router.post('/upload', authMiddleware, cvUploadLimiter, upload.single('file'), a
 });
 
 // TASK 4: Implement GET /api/cv/active (must come before /:id parameter matching)
-router.get('/active', authMiddleware, async (req: AuthenticatedRequest, res) => {
+router.get('/active', authMiddleware, async (req: AuthenticatedRequest, res: Response) => {
   try {
+    const userId = req.user?.id;
+    if (!userId) {
+      return res.status(401).json({ error: 'Unauthorized: missing user context' });
+    }
     const { data, error } = await supabase
       .from('master_cvs')
       .select('*')
-      .eq('user_id', req.user.id)
+      .eq('user_id', userId)
       .eq('is_active', true)
       .order('created_at', { ascending: false })
       .limit(1)
@@ -135,13 +146,17 @@ router.get('/active', authMiddleware, async (req: AuthenticatedRequest, res) => 
 });
 
 // GET /api/cv/:id - Fetch a specific master CV
-router.get('/:id', authMiddleware, async (req: AuthenticatedRequest, res) => {
+router.get('/:id', authMiddleware, async (req: AuthenticatedRequest, res: Response) => {
   try {
+    const userId = req.user?.id;
+    if (!userId) {
+      return res.status(401).json({ error: 'Unauthorized: missing user context' });
+    }
     const { data, error } = await supabase
       .from('master_cvs')
       .select('*')
       .eq('id', req.params.id)
-      .eq('user_id', req.user.id)
+      .eq('user_id', userId)
       .single();
     
     if (error) {
@@ -158,9 +173,12 @@ router.get('/:id', authMiddleware, async (req: AuthenticatedRequest, res) => {
 });
 
 // PUT /api/cv/:id - Update (re-parse) existing CV
-router.put('/:id', authMiddleware, upload.single('file'), async (req: AuthenticatedRequest, res) => {
+router.put('/:id', authMiddleware, upload.single('file'), async (req: AuthenticatedRequest, res: Response) => {
   try {
-    const userId = req.user.id;
+    const userId = req.user?.id;
+    if (!userId) {
+      return res.status(401).json({ error: 'Unauthorized: missing user context' });
+    }
     const cvId = req.params.id;
     let rawText = '';
     

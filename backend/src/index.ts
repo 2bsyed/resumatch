@@ -1,4 +1,4 @@
-import express from 'express';
+import express, { Request, Response } from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
 import dotenv from 'dotenv';
@@ -27,7 +27,7 @@ app.use('/api/tailor', tailorRouter);
 // Keep-alive for Render free tier (prevents 15-min spin-down)
 // UptimeRobot will ping /health every 14 minutes
 // This just ensures the endpoint responds fast
-app.get('/health', (req, res) => {
+app.get('/health', (req: Request, res: Response) => {
   res.status(200).json({ 
     status: 'ok', 
     timestamp: new Date().toISOString() 

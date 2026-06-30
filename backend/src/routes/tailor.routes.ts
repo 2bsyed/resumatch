@@ -1,4 +1,4 @@
-import { Router } from 'express';
+import { Router, Response } from 'express';
 import { authMiddleware, AuthenticatedRequest } from '../middleware/auth';
 import { supabase } from '../db/supabase';
 import { analyzeJobDescription } from '../services/gemini.service';
@@ -13,8 +13,11 @@ const router = Router();
 router.use(authMiddleware);
 
 // TASK 2: POST /api/tailor/analyze — Quick analysis (no tailoring yet)
-router.post('/analyze', async (req: AuthenticatedRequest, res) => {
-  const userId = req.user.id;
+router.post('/analyze', async (req: AuthenticatedRequest, res: Response) => {
+  const userId = req.user?.id;
+  if (!userId) {
+    return res.status(401).json({ error: 'Unauthorized: missing user context' });
+  }
   const { masterCvId, jdText, jobTitle, companyName } = req.body;
 
   if (!masterCvId || !jdText) {
@@ -77,11 +80,15 @@ const tailorStartLimiter = rateLimit({
   message: { error: 'Rate limit reached. Please wait before retrying.' },
   standardHeaders: true,
   legacyHeaders: false,
+  validate: { keyGeneratorIpFallback: false },
 });
 
 // TASK 2: POST /api/tailor/start — Kick off async tailoring job
-router.post('/start', tailorStartLimiter, async (req: AuthenticatedRequest, res) => {
-  const userId = req.user.id;
+router.post('/start', tailorStartLimiter, async (req: AuthenticatedRequest, res: Response) => {
+  const userId = req.user?.id;
+  if (!userId) {
+    return res.status(401).json({ error: 'Unauthorized: missing user context' });
+  }
   const { masterCvId, jdId } = req.body;
 
   if (!masterCvId || !jdId) {
@@ -141,15 +148,19 @@ router.post('/start', tailorStartLimiter, async (req: AuthenticatedRequest, res)
 });
 
 // TASK 2: GET /api/tailor/status/:jobId — Poll job status
-router.get('/status/:jobId', async (req: AuthenticatedRequest, res) => {
+router.get('/status/:jobId', async (req: AuthenticatedRequest, res: Response) => {
   const { jobId } = req.params;
+  const userId = req.user?.id;
+  if (!userId) {
+    return res.status(401).json({ error: 'Unauthorized: missing user context' });
+  }
 
   try {
     const { data: job, error: jobErr } = await supabase
       .from('processing_jobs')
       .select('*')
       .eq('id', jobId)
-      .eq('user_id', req.user.id)
+      .eq('user_id', userId)
       .single();
 
     if (jobErr || !job) {
@@ -161,7 +172,7 @@ router.get('/status/:jobId', async (req: AuthenticatedRequest, res) => {
       .from('tailored_cvs')
       .select('id')
       .eq('job_description_id', job.reference_id)
-      .eq('user_id', req.user.id)
+      .eq('user_id', userId)
       .maybeSingle();
 
     return res.json({
@@ -179,8 +190,11 @@ router.get('/status/:jobId', async (req: AuthenticatedRequest, res) => {
 });
 
 // TASK 2: GET /api/tailor/history — Get all tailored CVs for user (paginated)
-router.get('/history', async (req: AuthenticatedRequest, res) => {
-  const userId = req.user.id;
+router.get('/history', async (req: AuthenticatedRequest, res: Response) => {
+  const userId = req.user?.id;
+  if (!userId) {
+    return res.status(401).json({ error: 'Unauthorized: missing user context' });
+  }
   const limit = parseInt(req.query.limit as string) || 20;
   const offset = parseInt(req.query.offset as string) || 0;
 
@@ -213,8 +227,12 @@ router.get('/history', async (req: AuthenticatedRequest, res) => {
 });
 
 // TASK 2: GET /api/tailor/:tailoredCvId — Get completed result
-router.get('/:tailoredCvId', async (req: AuthenticatedRequest, res) => {
+router.get('/:tailoredCvId', async (req: AuthenticatedRequest, res: Response) => {
   const { tailoredCvId } = req.params;
+  const userId = req.user?.id;
+  if (!userId) {
+    return res.status(401).json({ error: 'Unauthorized: missing user context' });
+  }
 
   try {
     const { data, error } = await supabase
@@ -229,7 +247,7 @@ router.get('/:tailoredCvId', async (req: AuthenticatedRequest, res) => {
         )
       `)
       .eq('id', tailoredCvId)
-      .eq('user_id', req.user.id)
+      .eq('user_id', userId)
       .single();
 
     if (error || !data) {
@@ -244,8 +262,12 @@ router.get('/:tailoredCvId', async (req: AuthenticatedRequest, res) => {
 });
 
 // GET /api/tailor/:tailoredCvId/pdf — Generate and download CV PDF
-router.get('/:tailoredCvId/pdf', async (req: AuthenticatedRequest, res) => {
+router.get('/:tailoredCvId/pdf', async (req: AuthenticatedRequest, res: Response) => {
   const { tailoredCvId } = req.params;
+  const userId = req.user?.id;
+  if (!userId) {
+    return res.status(401).json({ error: 'Unauthorized: missing user context' });
+  }
 
   try {
     const { data: tailored, error } = await supabase
@@ -258,7 +280,7 @@ router.get('/:tailoredCvId/pdf', async (req: AuthenticatedRequest, res) => {
         )
       `)
       .eq('id', tailoredCvId)
-      .eq('user_id', req.user.id)
+      .eq('user_id', userId)
       .single();
 
     if (error || !tailored) {
@@ -289,15 +311,19 @@ router.get('/:tailoredCvId/pdf', async (req: AuthenticatedRequest, res) => {
 });
 
 // DELETE /api/tailor/:id — Delete a tailored CV
-router.delete('/:id', async (req: AuthenticatedRequest, res) => {
+router.delete('/:id', async (req: AuthenticatedRequest, res: Response) => {
   const { id } = req.params;
+  const userId = req.user?.id;
+  if (!userId) {
+    return res.status(401).json({ error: 'Unauthorized: missing user context' });
+  }
 
   try {
     const { error } = await supabase
       .from('tailored_cvs')
       .delete()
       .eq('id', id)
-      .eq('user_id', req.user.id);
+      .eq('user_id', userId);
 
     if (error) throw error;
 
