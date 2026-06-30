@@ -21,8 +21,21 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "ResuMatch — ATS Resume Optimizer",
-  description: "Free AI-powered resume optimizer that helps tailor your resume to beat Applicant Tracking Systems (ATS) in seconds.",
+  title: "ResuMatch — AI Resume Optimizer That Beats ATS",
+  description: "Free AI tool that rewrites your resume to match any job description and pass ATS systems. No credit card required.",
+  openGraph: {
+    title: "ResuMatch — AI Resume Optimizer That Beats ATS",
+    description: "Free AI tool that rewrites your resume to match any job description and pass ATS systems. No credit card required.",
+    type: "website",
+    locale: "en_US",
+    url: "https://resumatch.io",
+    siteName: "ResuMatch",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "ResuMatch — AI Resume Optimizer That Beats ATS",
+    description: "Free AI tool that rewrites your resume to match any job description and pass ATS systems. No credit card required.",
+  }
 };
 
 import { ToastProvider } from "../components/ui/Toast";
