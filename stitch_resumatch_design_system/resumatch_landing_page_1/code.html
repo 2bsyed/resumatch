@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>ResuMatch - Premium AI Resume Optimizer</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700&amp;family=Inter:wght@400;500&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary": "#ffb95f",
+                        "on-surface-variant": "#c2c6d5",
+                        "on-error": "#690005",
+                        "primary-fixed": "#d7e2ff",
+                        "surface-dim": "#0d141d",
+                        "surface-variant": "#2e353f",
+                        "on-surface": "#dce3f0",
+                        "outline": "#8c909e",
+                        "surface-container-highest": "#2e353f",
+                        "tertiary-fixed-dim": "#ffb95f",
+                        "surface-container-lowest": "#080f17",
+                        "tertiary-container": "#ca8100",
+                        "outline-variant": "#424753",
+                        "primary": "#acc7ff",
+                        "on-tertiary-fixed": "#2a1700",
+                        "on-secondary-fixed": "#002113",
+                        "background": "#0A0E1A", 
+                        "surface-container-low": "#111827", 
+                        "on-primary-fixed-variant": "#004492",
+                        "on-tertiary-container": "#3e2400",
+                        "on-secondary-container": "#00311f",
+                        "secondary-container": "#00a572",
+                        "on-error-container": "#ffdad6",
+                        "on-primary-fixed": "#001a40",
+                        "on-secondary": "#003824",
+                        "secondary-fixed": "#6ffbbe",
+                        "on-tertiary": "#472a00",
+                        "surface-container-high": "#1C2333", 
+                        "surface-container": "#192029",
+                        "primary-fixed-dim": "#acc7ff",
+                        "on-primary": "#002f68",
+                        "surface-bright": "#333a44",
+                        "on-tertiary-fixed-variant": "#653e00",
+                        "primary-container": "#4F8EF7", 
+                        "inverse-surface": "#dce3f0",
+                        "inverse-on-surface": "#2a313b",
+                        "secondary": "#10B981", 
+                        "tertiary-fixed": "#ffddb8",
+                        "surface": "#0d141d",
+                        "on-primary-container": "#FFFFFF", 
+                        "error": "#EF4444", 
+                        "inverse-primary": "#005bbf",
+                        "secondary-fixed-dim": "#4edea3",
+                        "on-background": "#dce3f0",
+                        "on-secondary-fixed-variant": "#005236",
+                        "error-container": "#93000a",
+                        "surface-tint": "#acc7ff",
+                        "brand-gray-border": "#1F2937",
+                        "brand-gray-text": "#9CA3AF"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px",
+                        "btn": "6px",
+                        "card": "8px"
+                    },
+                    "spacing": {
+                        "columns": "12",
+                        "base_unit": "4px",
+                        "margin_mobile": "16px",
+                        "margin_desktop": "40px",
+                        "gutter": "24px",
+                        "max_width": "1200px"
+                    },
+                    "fontFamily": {
+                        "body-base": ["Inter", "sans-serif"],
+                        "label-mono": ["JetBrains Mono", "monospace"],
+                        "display-hero-mobile": ["Plus Jakarta Sans", "sans-serif"],
+                        "headline-h1": ["Plus Jakarta Sans", "sans-serif"],
+                        "display-hero": ["Plus Jakarta Sans", "sans-serif"],
+                        "body-small": ["Inter", "sans-serif"],
+                        "headline-h3": ["Plus Jakarta Sans", "sans-serif"],
+                        "data-mono": ["JetBrains Mono", "monospace"],
+                        "headline-h2": ["Plus Jakarta Sans", "sans-serif"]
+                    },
+                    "fontSize": {
+                        "body-base": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "label-mono": ["11px", {"lineHeight": "16px", "letterSpacing": "0.08em", "fontWeight": "500"}],
+                        "display-hero-mobile": ["36px", {"lineHeight": "42px", "fontWeight": "700"}],
+                        "headline-h1": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                        "display-hero": ["56px", {"lineHeight": "64px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "body-small": ["13px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "headline-h3": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                        "data-mono": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "headline-h2": ["28px", {"lineHeight": "36px", "fontWeight": "600"}]
+                    },
+                    "boxShadow": {
+                        "primary-glow": "0 0 12px rgba(79, 142, 247, 0.3)"
+                    },
+                    "animation": {
+                        "pulse-gradient": "pulse-grad 2s cubic-bezier(0.4, 0, 0.6, 1) infinite",
+                    },
+                    "keyframes": {
+                        "pulse-grad": {
+                            "0%, 100%": { opacity: 1 },
+                            "50%": { opacity: 0.8 },
+                        }
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .pulse-bar {
+            background: linear-gradient(90deg, #4F8EF7, #10B981);
+            animation: pulse-grad 2s ease-in-out infinite alternate;
+        }
+        @keyframes pulse-grad {
+            0% { opacity: 0.8; }
+            100% { opacity: 1; }
+        }
+        body {
+            background-color: #0A0E1A;
+            color: #dce3f0;
+        }
+    </style>
+</head>
+<body class="font-body-base antialiased min-h-screen flex flex-col">
+<!-- Top Navigation (Shell suppressed for landing page flow, but user asked for premium landing page, so a minimal header is good) -->
+<header class="w-full h-16 border-b border-brand-gray-border flex items-center justify-between px-margin_desktop fixed top-0 z-50 bg-background/90 backdrop-blur-sm">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary-container" style="font-variation-settings: 'FILL' 1;">document_scanner</span>
+<span class="font-headline-h2 text-headline-h2 font-bold text-on-surface tracking-tight">ResuMatch</span>
+</div>
+<nav class="hidden md:flex gap-6 items-center">
+<a class="font-label-mono text-label-mono text-on-surface-variant hover:text-primary transition-colors" href="#">FEATURES</a>
+<a class="font-label-mono text-label-mono text-on-surface-variant hover:text-primary transition-colors" href="#">PRICING</a>
+<a class="font-label-mono text-label-mono text-on-surface-variant hover:text-primary transition-colors" href="#">LOGIN</a>
+<button class="bg-primary-container text-on-primary-container font-label-mono text-label-mono uppercase px-4 py-2 rounded-btn hover:brightness-110 hover:shadow-primary-glow transition-all">GET STARTED</button>
+</nav>
+</header>
+<!-- Main Content -->
+<main class="flex-grow pt-32 pb-24 px-margin_mobile md:px-margin_desktop max-w-max_width mx-auto w-full flex flex-col gap-y-24">
+<!-- Hero Section -->
+<section class="flex flex-col items-center text-center max-w-4xl mx-auto gap-y-6 relative z-10">
+<div class="w-full h-1 pulse-bar absolute -top-8 left-0 rounded-full opacity-80 shadow-[0_0_8px_#4F8EF7]"></div>
+<h1 class="font-display-hero-mobile text-display-hero-mobile md:font-display-hero md:text-display-hero text-on-surface">
+                Beat the ATS with <span class="text-primary-container">clinical precision.</span>
+</h1>
+<p class="font-body-base text-body-base text-on-surface-variant max-w-2xl">
+                Optimize your resume for any job description in seconds. Engineered for engineers, marketers, and finance professionals who demand data-driven results.
+            </p>
+<div class="flex flex-col sm:flex-row gap-4 mt-8">
+<button class="bg-primary-container text-on-primary-container font-label-mono text-label-mono uppercase px-6 py-3 rounded-btn hover:brightness-110 hover:shadow-primary-glow transition-all flex items-center justify-center gap-2">
+                    Optimize My Resume
+                    <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</button>
+<button class="border border-brand-gray-border text-on-surface font-label-mono text-label-mono uppercase px-6 py-3 rounded-btn hover:bg-surface-container-high transition-colors">
+                    How it works
+                </button>
+</div>
+</section>
+<!-- Dashboard Preview UI -->
+<section class="w-full relative z-10">
+<div class="bg-surface-container-low border border-brand-gray-border rounded-card p-6 md:p-8 flex flex-col lg:flex-row gap-8 shadow-2xl relative overflow-hidden">
+<!-- Background subtle grid -->
+<div class="absolute inset-0 pointer-events-none opacity-[0.03]" style="background-image: radial-gradient(#dce3f0 1px, transparent 1px); background-size: 24px 24px;"></div>
+<!-- Left: Original Resume -->
+<div class="flex-1 flex flex-col gap-4 relative z-10">
+<div class="flex justify-between items-center border-b border-brand-gray-border pb-2">
+<span class="font-label-mono text-label-mono text-brand-gray-text uppercase">Source_Document.pdf</span>
+<span class="font-label-mono text-label-mono text-error">Match: 42%</span>
+</div>
+<div class="space-y-4 font-body-small text-body-small text-on-surface-variant">
+<div class="h-4 bg-surface-container-high rounded w-3/4"></div>
+<div class="h-4 bg-surface-container-high rounded w-full"></div>
+<div class="h-4 bg-surface-container-high rounded w-5/6"></div>
+<div class="pt-4 border-t border-brand-gray-border/50 space-y-2">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-error"></span>
+<span class="text-error font-data-mono text-data-mono">Missing: "Cloud Architecture"</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-error"></span>
+<span class="text-error font-data-mono text-data-mono">Missing: "Kubernetes"</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-error"></span>
+<span class="text-error font-data-mono text-data-mono">Missing: "CI/CD Pipelines"</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Center: Score Widget (Absolute on Desktop, static on mobile) -->
+<div class="lg:absolute lg:left-1/2 lg:top-1/2 lg:-translate-x-1/2 lg:-translate-y-1/2 z-20 flex flex-col items-center justify-center bg-surface-container-high border border-brand-gray-border rounded-full w-32 h-32 shadow-xl shrink-0 self-center">
+<span class="font-label-mono text-label-mono text-brand-gray-text mb-1 uppercase">ATS Score</span>
+<span class="font-headline-h1 text-headline-h1 text-secondary drop-shadow-[0_0_8px_rgba(16,185,129,0.4)]">98%</span>
+</div>
+<!-- Right: Optimized Resume -->
+<div class="flex-1 flex flex-col gap-4 relative z-10">
+<div class="flex justify-between items-center border-b border-brand-gray-border pb-2">
+<span class="font-label-mono text-label-mono text-secondary uppercase">Optimized_Output.pdf</span>
+<span class="font-label-mono text-label-mono text-secondary">Match: 98%</span>
+</div>
+<div class="space-y-4 font-body-small text-body-small text-on-surface-variant">
+<div class="flex flex-wrap gap-2 mb-4">
+<span class="px-2 py-1 bg-secondary/20 text-secondary border border-secondary/30 rounded-[4px] font-data-mono text-data-mono text-xs">Cloud Architecture</span>
+<span class="px-2 py-1 bg-secondary/20 text-secondary border border-secondary/30 rounded-[4px] font-data-mono text-data-mono text-xs">Kubernetes</span>
+<span class="px-2 py-1 bg-secondary/20 text-secondary border border-secondary/30 rounded-[4px] font-data-mono text-data-mono text-xs">CI/CD Pipelines</span>
+<span class="px-2 py-1 bg-surface-container-high text-brand-gray-text rounded-[4px] font-data-mono text-data-mono text-xs">AWS</span>
+</div>
+<div class="h-4 bg-surface-container-high rounded w-full border border-secondary/20"></div>
+<div class="h-4 bg-surface-container-high rounded w-11/12 border border-secondary/20"></div>
+<div class="h-4 bg-surface-container-high rounded w-4/5 border border-secondary/20"></div>
+<div class="h-4 bg-surface-container-high rounded w-full border border-secondary/20"></div>
+</div>
+</div>
+</div>
+</section>
+<!-- Features Section -->
+<section class="grid grid-cols-1 md:grid-cols-3 gap-6 pt-12 border-t border-brand-gray-border">
+<div class="bg-surface-container-low border border-brand-gray-border rounded-card p-6 flex flex-col gap-4 hover:border-primary-container/50 transition-colors">
+<div class="w-10 h-10 rounded bg-surface-container-high flex items-center justify-center border border-brand-gray-border">
+<span class="material-symbols-outlined text-primary-container">radar</span>
+</div>
+<h3 class="font-headline-h3 text-headline-h3 text-on-surface">Real-time Keyword Extraction</h3>
+<p class="font-body-small text-body-small text-on-surface-variant">Instantly maps JD requirements against your existing experience matrix, highlighting critical gaps.</p>
+</div>
+<div class="bg-surface-container-low border border-brand-gray-border rounded-card p-6 flex flex-col gap-4 hover:border-primary-container/50 transition-colors">
+<div class="w-10 h-10 rounded bg-surface-container-high flex items-center justify-center border border-brand-gray-border">
+<span class="material-symbols-outlined text-primary-container">troubleshoot</span>
+</div>
+<h3 class="font-headline-h3 text-headline-h3 text-on-surface">Semantic Match Engine</h3>
+<p class="font-body-small text-body-small text-on-surface-variant">Goes beyond simple string matching. Understands context, synonyms, and industry-specific taxonomy.</p>
+</div>
+<div class="bg-surface-container-low border border-brand-gray-border rounded-card p-6 flex flex-col gap-4 hover:border-primary-container/50 transition-colors">
+<div class="w-10 h-10 rounded bg-surface-container-high flex items-center justify-center border border-brand-gray-border">
+<span class="material-symbols-outlined text-primary-container">picture_as_pdf</span>
+</div>
+<h3 class="font-headline-h3 text-headline-h3 text-on-surface">PDF/DocX Formatting</h3>
+<p class="font-body-small text-body-small text-on-surface-variant">Exports clean, parseable documents guaranteed to render perfectly in Workday, Greenhouse, and Lever.</p>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full border-t border-brand-gray-border bg-surface-container-lowest py-8 mt-auto">
+<div class="max-w-max_width mx-auto px-margin_desktop flex flex-col md:flex-row justify-between items-center gap-4">
+<div class="flex items-center gap-2 opacity-70">
+<span class="material-symbols-outlined text-on-surface-variant text-sm" style="font-variation-settings: 'FILL' 1;">document_scanner</span>
+<span class="font-label-mono text-label-mono text-on-surface-variant">ResuMatch © 2023</span>
+</div>
+<nav class="flex gap-6">
+<a class="font-label-mono text-label-mono text-brand-gray-text hover:text-on-surface transition-colors" href="#">Documentation</a>
+<a class="font-label-mono text-label-mono text-brand-gray-text hover:text-on-surface transition-colors" href="#">Support</a>
+<a class="font-label-mono text-label-mono text-brand-gray-text hover:text-on-surface transition-colors" href="#">Privacy</a>
+</nav>
+</div>
+</footer>
+</body></html>

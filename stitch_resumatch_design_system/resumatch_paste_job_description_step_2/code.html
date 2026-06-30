@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>ResuMatch - Paste Job Description</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700&amp;family=Inter:wght@400&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "on-surface-variant": "#c2c6d5",
+                        "surface-tint": "#acc7ff",
+                        "on-secondary-fixed": "#002113",
+                        "on-secondary-fixed-variant": "#005236",
+                        "inverse-surface": "#dce3f0",
+                        "on-tertiary": "#472a00",
+                        "primary-fixed": "#d7e2ff",
+                        "error-container": "#93000a",
+                        "secondary-fixed": "#6ffbbe",
+                        "secondary-container": "#00a572",
+                        "surface-dim": "#0d141d",
+                        "outline": "#8c909e",
+                        "on-tertiary-fixed": "#2a1700",
+                        "on-surface": "#dce3f0",
+                        "tertiary-fixed-dim": "#ffb95f",
+                        "tertiary": "#ffb95f",
+                        "on-secondary-container": "#00311f",
+                        "primary-fixed-dim": "#acc7ff",
+                        "surface-container": "#192029",
+                        "outline-variant": "#424753",
+                        "on-tertiary-container": "#3e2400",
+                        "on-primary-container": "#00285b",
+                        "surface-bright": "#333a44",
+                        "on-error": "#690005",
+                        "surface-container-low": "#151c25",
+                        "surface-container-lowest": "#080f17",
+                        "secondary-fixed-dim": "#4edea3",
+                        "on-error-container": "#ffdad6",
+                        "tertiary-fixed": "#ffddb8",
+                        "on-primary-fixed-variant": "#004492",
+                        "on-primary": "#002f68",
+                        "on-tertiary-fixed-variant": "#653e00",
+                        "secondary": "#4edea3",
+                        "inverse-primary": "#005bbf",
+                        "background": "#0d141d",
+                        "surface": "#0d141d",
+                        "surface-container-highest": "#2e353f",
+                        "primary": "#acc7ff",
+                        "on-primary-fixed": "#001a40",
+                        "surface-variant": "#2e353f",
+                        "inverse-on-surface": "#2a313b",
+                        "on-secondary": "#003824",
+                        "on-background": "#dce3f0",
+                        "surface-container-high": "#232a34",
+                        "primary-container": "#508ff8",
+                        "error": "#ffb4ab",
+                        "tertiary-container": "#ca8100",
+                        
+                        // Clinical Precision specific additions requested implicitly
+                        "clinical-primary": "#4F8EF7",
+                        "clinical-bg": "#0A0E1A",
+                        "clinical-card": "#111827",
+                        "clinical-modal": "#1C2333",
+                        "clinical-border-card": "#1F2937",
+                        "clinical-border-modal": "#374151",
+                        "clinical-success": "#10B981",
+                        "clinical-warning": "#F59E0B"
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    spacing: {
+                        "margin_mobile": "16px",
+                        "margin_desktop": "40px",
+                        "gutter": "24px",
+                        "max_width": "1200px",
+                        "columns": "12",
+                        "base_unit": "4px"
+                    },
+                    fontFamily: {
+                        "headline-h3": ["Plus Jakarta Sans"],
+                        "body-base": ["Inter"],
+                        "data-mono": ["JetBrains Mono"],
+                        "headline-h1": ["Plus Jakarta Sans"],
+                        "headline-h2": ["Plus Jakarta Sans"],
+                        "display-hero-mobile": ["Plus Jakarta Sans"],
+                        "body-small": ["Inter"],
+                        "label-mono": ["JetBrains Mono"],
+                        "display-hero": ["Plus Jakarta Sans"]
+                    },
+                    fontSize: {
+                        "headline-h3": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "body-base": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "data-mono": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "headline-h1": ["40px", { "lineHeight": "48px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+                        "headline-h2": ["28px", { "lineHeight": "36px", "fontWeight": "600" }],
+                        "display-hero-mobile": ["36px", { "lineHeight": "42px", "fontWeight": "700" }],
+                        "body-small": ["13px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "label-mono": ["11px", { "lineHeight": "16px", "letterSpacing": "0.08em", "fontWeight": "500" }],
+                        "display-hero": ["56px", { "lineHeight": "64px", "letterSpacing": "-0.02em", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .pulse-gradient {
+            background: linear-gradient(90deg, #4F8EF7, #10B981);
+            animation: pulse-op 2s infinite ease-in-out;
+        }
+        @keyframes pulse-op {
+            0%, 100% { opacity: 0.8; }
+            50% { opacity: 1.0; }
+        }
+        .glow-hover:hover {
+            box-shadow: 0 0 12px rgba(79, 142, 247, 0.3);
+        }
+    </style>
+</head>
+<body class="bg-[#0A0E1A] text-on-background min-h-screen font-body-base overflow-x-hidden selection:bg-clinical-primary selection:text-white">
+<!-- SideNavBar -->
+<nav class="fixed left-0 top-0 h-full w-[240px] bg-[#111827] border-r border-[#1F2937] flex flex-col py-6 px-4 gap-8 z-50">
+<!-- Header -->
+<div class="px-2">
+<h1 class="font-headline-h2 text-headline-h2 font-bold text-clinical-primary tracking-tight">ResuMatch</h1>
+</div>
+<!-- Navigation Tabs -->
+<div class="flex-1 flex flex-col gap-2">
+<a class="flex items-center gap-3 px-3 py-2 rounded-md text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">dashboard</span>
+<span class="font-label-mono text-label-mono">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-md text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">description</span>
+<span class="font-label-mono text-label-mono">My Master CV</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-md text-clinical-primary font-bold border-r-2 border-clinical-primary bg-[#1C2333] hover:brightness-110 transition-colors" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">auto_fix_high</span>
+<span class="font-label-mono text-label-mono">New Tailoring</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-md text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">history</span>
+<span class="font-label-mono text-label-mono">History</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-md text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">settings</span>
+<span class="font-label-mono text-label-mono">Settings</span>
+</a>
+</div>
+<!-- Footer -->
+<div class="mt-auto flex flex-col gap-4 border-t border-[#1F2937] pt-4">
+<div class="px-2 font-label-mono text-label-mono text-on-surface-variant">
+                Gemini AI Daily uses: 3/10
+            </div>
+<div class="flex flex-col gap-2">
+<a class="flex items-center gap-3 px-3 py-2 rounded-md text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">help_outline</span>
+<span class="font-label-mono text-label-mono">Support</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-md text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">logout</span>
+<span class="font-label-mono text-label-mono">Log Out</span>
+</a>
+</div>
+<div class="flex items-center gap-3 px-2 pt-2">
+<div class="w-8 h-8 rounded-full bg-surface-container-high overflow-hidden border border-[#374151]">
+<img alt="Alex Chen" class="w-full h-full object-cover" data-alt="A small, professional headshot avatar of a man with dark hair, wearing a navy suit jacket, clean white background, high resolution, minimalist corporate style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC8v6-u9EfFSkvGSji5S-ceZx8036NKOp1HZMGEbLfyjyn37SvATTClsTG7kTceO-jFVQ7ZGofD08cgN9no-h8XYo6MRM3KUHYMmalA0yZfWc2VS5hLowWIj0eV_MJzUrJ_cDL7e7egjdaJ76MX2gESdCy8552rqGsuTiqWOvePSbAYD7KLlZmyEtw8AeDXN2gU57ZG6j-csUTMARUljTBto2IUkERUUApwbMwryJ-yBg8P0RftK7n8etYPPzZ30AE5i5a9YwVJ3A"/>
+</div>
+<div class="flex flex-col">
+<span class="font-body-small text-body-small text-on-surface font-semibold">Alex Chen</span>
+</div>
+</div>
+</div>
+</nav>
+<!-- Main Content Area -->
+<main class="ml-[240px] p-margin_desktop max-w-max_width">
+<!-- Step Indicator -->
+<div class="flex items-center gap-4 mb-16 max-w-2xl">
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded-full bg-clinical-success flex items-center justify-center text-white">
+<span class="material-symbols-outlined text-[14px]">check</span>
+</div>
+<span class="font-label-mono text-label-mono text-on-surface">Upload CV</span>
+</div>
+<div class="flex-1 h-px bg-[#374151]"></div>
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded-full bg-clinical-primary flex items-center justify-center text-white font-data-mono text-[12px] font-bold">2</div>
+<span class="font-label-mono text-label-mono text-clinical-primary font-bold">Job Description</span>
+</div>
+<div class="flex-1 h-px bg-[#374151]"></div>
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded-full border border-[#424753] flex items-center justify-center text-[#8c909e] font-data-mono text-[12px]">3</div>
+<span class="font-label-mono text-label-mono text-[#8c909e]">Your Results</span>
+</div>
+</div>
+<!-- Header -->
+<div class="mb-10">
+<h2 class="font-headline-h2 text-[28px] font-bold text-white mb-2">Paste the job description</h2>
+<p class="font-body-base text-[16px] text-[#9CA3AF]">Copy the full JD from LinkedIn, company site, or anywhere. The more detail, the better your match.</p>
+</div>
+<!-- Two-Column Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+<!-- Left Column: Input -->
+<div class="lg:col-span-7 flex flex-col gap-6">
+<!-- Side-by-side inputs -->
+<div class="flex gap-4 w-full">
+<div class="flex-1 flex flex-col gap-1.5">
+<label class="font-label-mono text-[11px] uppercase tracking-wider text-[#9CA3AF]">Job Title</label>
+<input class="w-full bg-[#111827] border border-[#1F2937] rounded-[4px] px-3 py-2.5 text-white font-body-small placeholder:text-[#4B5563] focus:outline-none focus:border-clinical-primary focus:ring-0 transition-colors" placeholder="Senior Software Engineer" type="text"/>
+</div>
+<div class="flex-1 flex flex-col gap-1.5">
+<label class="font-label-mono text-[11px] uppercase tracking-wider text-[#9CA3AF]">Company Name</label>
+<input class="w-full bg-[#111827] border border-[#1F2937] rounded-[4px] px-3 py-2.5 text-white font-body-small placeholder:text-[#4B5563] focus:outline-none focus:border-clinical-primary focus:ring-0 transition-colors" placeholder="Google" type="text"/>
+</div>
+</div>
+<!-- Main Textarea -->
+<div class="flex flex-col gap-1.5">
+<label class="font-label-mono text-[13px] uppercase tracking-[0.08em] text-[#9CA3AF]">Full Job Description *</label>
+<div class="relative">
+<textarea class="w-full bg-[#0F1623] border border-[#374151] rounded-[8px] p-4 text-white font-body-base placeholder:text-[#4B5563] min-h-[360px] resize-y focus:outline-none focus:border-clinical-primary focus:ring-0 transition-colors" placeholder="About the Role...
+
+We're looking for...
+
+Responsibilities:
+- Design and implement scalable distributed systems..."></textarea>
+<div class="absolute bottom-3 right-4 font-data-mono text-[12px] text-[#4B5563]">0 / 5000</div>
+</div>
+</div>
+<!-- Analyze Button -->
+<div class="mt-2 flex flex-col items-center gap-3">
+<button class="w-full bg-clinical-primary text-white font-data-mono text-[14px] font-medium uppercase h-[48px] rounded-[6px] hover:brightness-110 glow-hover transition-all flex items-center justify-center gap-2">
+                        Analyze Job Description
+                        <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</button>
+<span class="font-body-small text-[12px] text-[#4B5563]">⚡ Extracts keywords, required skills, and ATS scoring criteria</span>
+</div>
+</div>
+<!-- Right Column: Extraction Preview -->
+<div class="lg:col-span-5 flex flex-col gap-8 lg:pl-4">
+<!-- Headers -->
+<div class="flex flex-col gap-1">
+<h3 class="font-headline-h3 text-[16px] font-semibold text-white">Extracted Keywords</h3>
+<p class="font-body-small text-[13px] text-[#9CA3AF]">These are what ATS systems scan for</p>
+</div>
+<!-- Required Skills -->
+<div class="flex flex-col gap-3">
+<label class="font-label-mono text-[11px] uppercase tracking-wider text-[#4B5563]">Required Skills</label>
+<div class="flex flex-wrap gap-2">
+<span class="px-3 py-1.5 bg-[#1C2333] border border-[#374151] rounded-[4px] font-data-mono text-[13px] text-white">Python</span>
+<span class="px-3 py-1.5 bg-[#1C2333] border border-[#374151] rounded-[4px] font-data-mono text-[13px] text-white">REST APIs</span>
+<span class="px-3 py-1.5 bg-[#1C2333] border border-[#374151] rounded-[4px] font-data-mono text-[13px] text-white">Distributed Systems</span>
+<span class="px-3 py-1.5 bg-[#1C2333] border border-[#374151] rounded-[4px] font-data-mono text-[13px] text-white">PostgreSQL</span>
+<span class="px-3 py-1.5 bg-[#1C2333] border border-[#374151] rounded-[4px] font-data-mono text-[13px] text-white">Kubernetes</span>
+<span class="px-3 py-1.5 bg-[#1C2333] border border-[#374151] rounded-[4px] font-data-mono text-[13px] text-white">System Design</span>
+<span class="px-3 py-1.5 bg-[#1C2333] border border-[#374151] rounded-[4px] font-data-mono text-[13px] text-white">Agile</span>
+</div>
+</div>
+<!-- Nice to Have -->
+<div class="flex flex-col gap-3">
+<label class="font-label-mono text-[11px] uppercase tracking-wider text-[#4B5563]">Nice to Have</label>
+<div class="flex flex-wrap gap-2 opacity-80">
+<span class="px-3 py-1.5 bg-[#1C2333] border border-[#374151] rounded-[4px] font-data-mono text-[13px] text-white">Go</span>
+<span class="px-3 py-1.5 bg-[#1C2333] border border-[#374151] rounded-[4px] font-data-mono text-[13px] text-white">Terraform</span>
+<span class="px-3 py-1.5 bg-[#1C2333] border border-[#374151] rounded-[4px] font-data-mono text-[13px] text-white">gRPC</span>
+</div>
+</div>
+<!-- Match Preview Card -->
+<div class="bg-[#0A0E1A] border border-[#374151] rounded-[12px] p-[16px] flex flex-col gap-4 mt-4 shadow-lg">
+<div class="font-body-small text-[14px] text-[#9CA3AF]">Initial ATS Match Estimate</div>
+<div class="flex items-baseline gap-1">
+<span class="font-data-mono text-[36px] font-bold text-clinical-warning leading-none">43</span>
+<span class="font-data-mono text-[20px] text-[#4B5563] leading-none">/100</span>
+</div>
+<div class="font-body-small text-[12px] text-[#4B5563] -mt-2">Before tailoring your CV</div>
+<!-- Progress Bar -->
+<div class="w-full h-2 bg-[#1C2333] rounded-full overflow-hidden mt-2">
+<div class="h-full bg-clinical-warning w-[43%]"></div>
+</div>
+<div class="font-body-small text-[13px] text-[#9CA3AF] mt-1">15 of 28 keywords found in your current CV</div>
+</div>
+<!-- Final CTA -->
+<button class="w-full bg-clinical-primary text-white font-data-mono text-[14px] font-medium uppercase h-[48px] rounded-[6px] hover:brightness-110 glow-hover transition-all flex items-center justify-center gap-2 mt-auto">
+                    Tailor My CV
+                    <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</button>
+</div>
+</div>
+</main>
+</body></html>

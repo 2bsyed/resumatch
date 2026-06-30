@@ -1,0 +1,92 @@
+import type { Config } from 'tailwindcss';
+
+const config: Config = {
+  content: [
+    "./app/**/*.{js,ts,jsx,tsx}",
+    "./components/**/*.{js,ts,jsx,tsx}",
+    "./lib/**/*.{js,ts,jsx,tsx}",
+  ],
+  theme: {
+    extend: {
+      colors: {
+        // Core Palette from DESIGN.md Frontmatter
+        surface: '#0d141d',
+        'surface-dim': '#0d141d',
+        'surface-bright': '#333a44',
+        'surface-container-lowest': '#080f17',
+        'surface-container-low': '#151c25',
+        'surface-container': '#192029',
+        'surface-container-high': '#232a34',
+        'surface-container-highest': '#2e353f',
+        'on-surface': '#dce3f0',
+        'on-surface-variant': '#c2c6d5',
+        'inverse-surface': '#dce3f0',
+        'inverse-on-surface': '#2a313b',
+        outline: '#8c909e',
+        'outline-variant': '#424753',
+        'surface-tint': '#acc7ff',
+        primary: '#acc7ff',
+        'on-primary': '#002f68',
+        'primary-container': '#508ff8',
+        'on-primary-container': '#00285b',
+        'inverse-primary': '#005bbf',
+        secondary: '#4edea3',
+        'on-secondary': '#003824',
+        'secondary-container': '#00a572',
+        'on-secondary-container': '#00311f',
+        tertiary: '#ffb95f',
+        'on-tertiary': '#472a00',
+        'tertiary-container': '#ca8100',
+        'on-tertiary-container': '#3e2400',
+        error: '#ffb4ab',
+        'on-error': '#690005',
+        'error-container': '#93000a',
+        'on-error-container': '#ffdad6',
+        'primary-fixed': '#d7e2ff',
+        'primary-fixed-dim': '#acc7ff',
+        'on-primary-fixed': '#001a40',
+        'on-primary-fixed-variant': '#004492',
+        'secondary-fixed': '#6ffbbe',
+        'secondary-fixed-dim': '#4edea3',
+        'on-secondary-fixed': '#002113',
+        'on-secondary-fixed-variant': '#005236',
+        'tertiary-fixed': '#ffddb8',
+        'tertiary-fixed-dim': '#ffb95f',
+        'on-tertiary-fixed': '#2a1700',
+        'on-tertiary-fixed-variant': '#653e00',
+        background: '#0d141d',
+        'on-background': '#dce3f0',
+        'surface-variant': '#2e353f',
+
+        // Specific hardware / developer layer tokens from the DESIGN.md text body
+        brand: {
+          bg: '#0A0E1A',
+          level0: '#0A0E1A',
+          level1: '#111827',
+          level1Border: '#1F2937',
+          level2: '#1C2333',
+          level2Border: '#374151',
+          primary: '#4F8EF7',
+          secondary: '#10B981',
+          chipBg: '#1C2333',
+          chipText: '#9CA3AF',
+        }
+      },
+      borderRadius: {
+        sm: '0.25rem',
+        DEFAULT: '0.5rem',
+        md: '0.75rem',
+        lg: '1rem',
+        xl: '1.5rem',
+        card: '8px',
+        button: '6px',
+        input: '4px',
+        modal: '16px',
+        chip: '4px',
+      }
+    },
+  },
+  plugins: [],
+};
+
+export default config;

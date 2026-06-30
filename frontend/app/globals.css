@@ -1,0 +1,124 @@
+@import "tailwindcss";
+
+@config "../tailwind.config.ts";
+
+:root {
+  --font-plus-jakarta-sans: 'Plus Jakarta Sans', sans-serif;
+  --font-inter: 'Inter', sans-serif;
+  --font-jetbrains-mono: 'JetBrains Mono', monospace;
+}
+
+body {
+  background: #0d141d; /* Matches background and Level 0 surface */
+  color: #dce3f0;      /* Matches on-background */
+  font-family: var(--font-inter);
+}
+
+/* Glow Classes */
+.glow-primary {
+  box-shadow: 0 0 12px rgba(79, 142, 247, 0.3);
+}
+
+.glow-success {
+  box-shadow: 0 0 12px rgba(78, 222, 163, 0.3);
+}
+
+/* Animations */
+@keyframes pulse-glow {
+  0%, 100% {
+    opacity: 0.8;
+  }
+  50% {
+    opacity: 1.0;
+  }
+}
+
+.pulse-glow {
+  animation: pulse-glow 2s infinite ease-in-out;
+}
+
+@keyframes pulse-bar-slide {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.pulse-bar {
+  background: linear-gradient(90deg, #4F8EF7, #10B981, #4F8EF7);
+  background-size: 200% 200%;
+  animation: pulse-bar-slide 3s infinite ease-in-out, pulse-glow 2s infinite ease-in-out;
+}
+
+/* Core Design System Typography (DESIGN.md) */
+.display-hero {
+  font-family: var(--font-plus-jakarta-sans);
+  font-size: 56px;
+  font-weight: 700;
+  line-height: 64px;
+  letter-spacing: -0.02em;
+}
+
+.display-hero-mobile {
+  font-family: var(--font-plus-jakarta-sans);
+  font-size: 36px;
+  font-weight: 700;
+  line-height: 42px;
+}
+
+.headline-h1 {
+  font-family: var(--font-plus-jakarta-sans);
+  font-size: 40px;
+  font-weight: 700;
+  line-height: 48px;
+  letter-spacing: -0.01em;
+}
+
+.headline-h2 {
+  font-family: var(--font-plus-jakarta-sans);
+  font-size: 28px;
+  font-weight: 600;
+  line-height: 36px;
+}
+
+.headline-h3 {
+  font-family: var(--font-plus-jakarta-sans);
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 28px;
+}
+
+.body-base {
+  font-family: var(--font-inter);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+}
+
+.body-small {
+  font-family: var(--font-inter);
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 20px;
+}
+
+.label-mono {
+  font-family: var(--font-jetbrains-mono);
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 16px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.data-mono {
+  font-family: var(--font-jetbrains-mono);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+}

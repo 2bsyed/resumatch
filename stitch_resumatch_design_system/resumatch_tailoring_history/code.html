@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Tailoring History - ResuMatch</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&amp;family=Plus+Jakarta+Sans:wght@600;700&amp;family=Inter:wght@400&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "inverse-on-surface": "#2a313b",
+                        "primary-fixed-dim": "#acc7ff",
+                        "on-primary-fixed-variant": "#004492",
+                        "on-error-container": "#ffdad6",
+                        "on-primary": "#002f68",
+                        "on-error": "#690005",
+                        "on-secondary-fixed-variant": "#005236",
+                        "surface-container-high": "#232a34",
+                        "outline": "#8c909e",
+                        "on-secondary-container": "#00311f",
+                        "secondary-fixed": "#6ffbbe",
+                        "on-secondary": "#003824",
+                        "tertiary": "#ffb95f",
+                        "surface-dim": "#0d141d",
+                        "primary-fixed": "#d7e2ff",
+                        "on-tertiary-fixed": "#2a1700",
+                        "surface-variant": "#2e353f",
+                        "surface-container": "#192029",
+                        "surface-tint": "#acc7ff",
+                        "on-secondary-fixed": "#002113",
+                        "on-tertiary-fixed-variant": "#653e00",
+                        "primary-container": "#508ff8",
+                        "on-tertiary-container": "#3e2400",
+                        "secondary": "#4edea3",
+                        "error-container": "#93000a",
+                        "background": "#0d141d",
+                        "inverse-surface": "#dce3f0",
+                        "tertiary-fixed": "#ffddb8",
+                        "inverse-primary": "#005bbf",
+                        "surface": "#0d141d",
+                        "surface-container-highest": "#2e353f",
+                        "on-surface": "#dce3f0",
+                        "on-primary-fixed": "#001a40",
+                        "on-primary-container": "#00285b",
+                        "tertiary-container": "#ca8100",
+                        "on-tertiary": "#472a00",
+                        "secondary-fixed-dim": "#4edea3",
+                        "secondary-container": "#00a572",
+                        "error": "#ffb4ab",
+                        "surface-bright": "#333a44",
+                        "primary": "#acc7ff",
+                        "surface-container-lowest": "#080f17",
+                        "outline-variant": "#424753",
+                        "surface-container-low": "#151c25",
+                        "on-background": "#dce3f0",
+                        "tertiary-fixed-dim": "#ffb95f",
+                        "on-surface-variant": "#c2c6d5"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "margin_mobile": "16px",
+                        "margin_desktop": "40px",
+                        "max_width": "1200px",
+                        "gutter": "24px",
+                        "columns": "12",
+                        "base_unit": "4px"
+                    },
+                    "fontFamily": {
+                        "label-mono": ["JetBrains Mono"],
+                        "headline-h3": ["Plus Jakarta Sans"],
+                        "display-hero": ["Plus Jakarta Sans"],
+                        "headline-h1": ["Plus Jakarta Sans"],
+                        "display-hero-mobile": ["Plus Jakarta Sans"],
+                        "body-base": ["Inter"],
+                        "headline-h2": ["Plus Jakarta Sans"],
+                        "body-small": ["Inter"],
+                        "data-mono": ["JetBrains Mono"]
+                    },
+                    "fontSize": {
+                        "label-mono": ["11px", { "lineHeight": "16px", "letterSpacing": "0.08em", "fontWeight": "500" }],
+                        "headline-h3": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "display-hero": ["56px", { "lineHeight": "64px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "headline-h1": ["40px", { "lineHeight": "48px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+                        "display-hero-mobile": ["36px", { "lineHeight": "42px", "fontWeight": "700" }],
+                        "body-base": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "headline-h2": ["28px", { "lineHeight": "36px", "fontWeight": "600" }],
+                        "body-small": ["13px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "data-mono": ["14px", { "lineHeight": "20px", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .pulse-glow {
+            box-shadow: 0 0 12px rgba(80, 143, 248, 0.3);
+            transition: box-shadow 0.2s ease-in-out;
+        }
+        .pulse-glow:hover {
+            box-shadow: 0 0 16px rgba(80, 143, 248, 0.5);
+        }
+        .ghost-button {
+            border: 1px solid #1F2937;
+            background-color: transparent;
+            color: #F9FAFB;
+            transition: background-color 0.2s;
+        }
+        .ghost-button:hover {
+            background-color: rgba(31, 41, 55, 0.5);
+        }
+        .text-accent-amber { color: #F59E0B; }
+        .text-accent-emerald { color: #10B981; }
+        .bg-accent-emerald-subtle { background-color: rgba(16, 185, 129, 0.1); }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-base h-screen flex overflow-hidden">
+<!-- SideNavBar -->
+<nav class="bg-surface-container-low dark:bg-surface-container-low h-screen w-[240px] sticky top-0 left-0 border-r border-outline-variant flex flex-col h-full py-6 shrink-0 hidden md:flex z-10">
+<!-- Brand Logo -->
+<div class="px-4 mb-8">
+<h2 class="font-headline-h2 text-headline-h2 font-bold text-primary tracking-tighter">ResuMatch</h2>
+</div>
+<!-- Navigation Links -->
+<div class="flex-1 space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-variant/50 hover:text-on-surface transition-colors duration-200 hover:scale-[0.98] transition-transform duration-150" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">dashboard</span>
+<span class="font-label-mono text-label-mono">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-variant/50 hover:text-on-surface transition-colors duration-200 hover:scale-[0.98] transition-transform duration-150" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">description</span>
+<span class="font-label-mono text-label-mono">My Master CV</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-variant/50 hover:text-on-surface transition-colors duration-200 hover:scale-[0.98] transition-transform duration-150" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">auto_fix_high</span>
+<span class="font-label-mono text-label-mono">New Tailoring</span>
+</a>
+<!-- Active Navigation -->
+<a class="flex items-center gap-3 px-4 py-3 text-primary bg-primary-container/10 border-r-2 border-primary scale-[0.98] transition-transform duration-150" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">history</span>
+<span class="font-label-mono text-label-mono">History</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-variant/50 hover:text-on-surface transition-colors duration-200 hover:scale-[0.98] transition-transform duration-150" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">settings</span>
+<span class="font-label-mono text-label-mono">Settings</span>
+</a>
+</div>
+<!-- Footer Area -->
+<div class="mt-auto px-4 space-y-4">
+<!-- CTA -->
+<div class="bg-[#1C2333] border border-[#374151] rounded-lg p-3 text-center mb-4">
+<span class="font-label-mono text-label-mono text-primary">AI Usage: 85%</span>
+</div>
+<a class="flex items-center gap-3 py-2 text-on-surface-variant hover:text-on-surface transition-colors duration-200" href="#">
+<span class="material-symbols-outlined text-[18px]">help</span>
+<span class="font-label-mono text-label-mono">Help Center</span>
+</a>
+<a class="flex items-center gap-3 py-2 text-on-surface-variant hover:text-on-surface transition-colors duration-200" href="#">
+<span class="material-symbols-outlined text-[18px]">logout</span>
+<span class="font-label-mono text-label-mono">Logout</span>
+</a>
+<!-- User Profile -->
+<div class="flex items-center gap-3 pt-4 mt-2 border-t border-outline-variant">
+<img alt="User profile photo" class="w-10 h-10 rounded-full object-cover border border-[#1F2937]" data-alt="A professional headshot of a young man, minimalist lighting, high contrast, dark mode aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCR6_VGIKXpCajXHIlMkmyol8bU5rAHvl9eBnIoyv-7La55s74KvIZ9bocaLYXQZgmBdd0Pbti8-ca-uJvrBqm7arxIo007PlLbZICJGTtUHmEGjkQw53wzxK8IBejijfr2vOG-K_u-X5FBs2h8RFREcGymV1hN4NT0r3q9dFB-yl8n-EAfOunZKg0w_5_BgygOZ7UGjVCm0CyEHW35rzQ7joREmSK_IZnyAPXBE7bM4P79k53cj_Qfqk8td_Ks9f996sNVAdeZ3A"/>
+<div class="flex flex-col">
+<span class="font-body-small text-body-small font-semibold text-on-surface">Alex Rivera</span>
+<span class="font-label-mono text-label-mono text-on-surface-variant">Premium Tier</span>
+</div>
+</div>
+</div>
+</nav>
+<!-- Main Content Area -->
+<main class="flex-1 overflow-y-auto bg-background p-[32px]">
+<!-- TopAppBar (Mobile Only) -->
+<div class="md:hidden flex justify-between items-center w-full h-16 mb-6 border-b border-outline-variant pb-4">
+<h1 class="font-headline-h3 text-headline-h3 font-bold text-on-surface">ResuMatch</h1>
+<div class="flex items-center gap-4 text-on-surface-variant">
+<span class="material-symbols-outlined hover:text-primary transition-colors cursor-pointer">search</span>
+<span class="material-symbols-outlined hover:text-primary transition-colors cursor-pointer">notifications</span>
+<img alt="User avatar" class="w-8 h-8 rounded-full border border-outline-variant object-cover" data-alt="A professional headshot of a young man, minimalist lighting, high contrast, dark mode aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuALfpzlP-oY9kgMf8YpTBJSZsuduCesjhHNDRLGR33SFt7l1sCW0OvNPm_A3NF7ppNwqbkURTRQDfJGW6VE2jaU5QxhcxIeiI7jDwfeWpy4rCNUh99zTLHxh5ZJwZiMoDgO8Adivsg0u9BliWekUsoV2rjQO-z6vvG-XYx6q-DvfEtYWTjzZ-DgNVM62Dvr-C0mKVsnhoDdbnhz5AgThuTzKWbeDB_AykJlcjmAz_l0me8uUNxso42_H3wxqH1z4I9KPDa-HJZE5Q"/>
+</div>
+</div>
+<div class="max-w-[1000px] mx-auto">
+<!-- Header Section -->
+<header class="mb-8">
+<h1 class="text-[28px] leading-[36px] font-bold text-white mb-2">Tailoring History</h1>
+<p class="font-body-base text-body-base text-[#9CA3AF]">All your tailored CVs, indexed by job.</p>
+</header>
+<!-- Controls Row -->
+<div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8">
+<div class="relative w-full sm:w-[320px]">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-[#9CA3AF] text-[18px]">search</span>
+<input class="w-full bg-[#111827] border border-[#1F2937] text-white pl-10 pr-4 py-2 rounded-[4px] focus:outline-none focus:border-[#4F8EF7] font-body-small text-body-small transition-colors" placeholder="Search by job title or company..." type="text"/>
+</div>
+<button class="ghost-button flex items-center gap-2 px-4 py-2 rounded-[4px] font-label-mono text-label-mono uppercase">
+                    All scores
+                    <span class="material-symbols-outlined text-[16px]">expand_more</span>
+</button>
+</div>
+<!-- Card List (The History) -->
+<div class="space-y-4">
+<!-- Card 1 -->
+<div class="bg-[#111827] border border-[#1F2937] rounded-[8px] p-6 flex flex-col lg:flex-row lg:items-center gap-6 relative group hover:border-[#374151] transition-colors">
+<!-- Left: Logo & Info -->
+<div class="flex items-start gap-4 flex-1">
+<div class="w-10 h-10 rounded-full bg-[#1C2333] flex items-center justify-center border border-[#374151] shrink-0 text-white font-headline-h3 text-headline-h3">
+                            G
+                        </div>
+<div class="flex flex-col">
+<h3 class="text-[16px] font-bold text-white mb-1">Senior Software Engineer</h3>
+<p class="text-[14px] text-[#9CA3AF] mb-3">Google · Applied 3 days ago</p>
+<div class="flex gap-2">
+<span class="bg-[#1C2333] text-[#9CA3AF] px-2 py-1 rounded-[4px] font-label-mono text-[11px] uppercase tracking-wide border border-[#374151]">Engineering</span>
+<span class="bg-[#1C2333] text-[#9CA3AF] px-2 py-1 rounded-[4px] font-label-mono text-[11px] uppercase tracking-wide border border-[#374151]">Tailored</span>
+</div>
+</div>
+</div>
+<!-- Center: Metrics -->
+<div class="flex flex-col items-start lg:items-end flex-shrink-0 min-w-[200px]">
+<div class="flex items-center gap-3 mb-1">
+<div class="font-data-mono text-data-mono flex items-center gap-2">
+<span class="text-accent-amber">43</span>
+<span class="text-[#4B5563] material-symbols-outlined text-[16px]">arrow_right_alt</span>
+<span class="text-accent-emerald">84</span>
+</div>
+<span class="bg-accent-emerald-subtle text-accent-emerald px-2 py-0.5 rounded-full font-label-mono text-[10px] font-bold">+41 pts</span>
+</div>
+<p class="text-[12px] text-[#4B5563] font-body-small">21/25 keywords matched</p>
+</div>
+<!-- Right: Actions -->
+<div class="flex items-center gap-3 pt-4 lg:pt-0 mt-4 lg:mt-0 border-t border-[#1F2937] lg:border-t-0 w-full lg:w-auto justify-end">
+<button class="ghost-button px-3 py-1.5 rounded-[4px] font-label-mono text-label-mono uppercase">View</button>
+<button class="ghost-button px-3 py-1.5 rounded-[4px] font-label-mono text-label-mono uppercase flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px]">download</span> PDF
+                        </button>
+<button class="text-[#9CA3AF] hover:text-white p-1 ml-2 transition-colors">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="bg-[#111827] border border-[#1F2937] rounded-[8px] p-6 flex flex-col lg:flex-row lg:items-center gap-6 relative group hover:border-[#374151] transition-colors">
+<div class="flex items-start gap-4 flex-1">
+<div class="w-10 h-10 rounded-full bg-[#1C2333] flex items-center justify-center border border-[#374151] shrink-0 text-white font-headline-h3 text-headline-h3">
+                            A
+                        </div>
+<div class="flex flex-col">
+<h3 class="text-[16px] font-bold text-white mb-1">Product Designer</h3>
+<p class="text-[14px] text-[#9CA3AF] mb-3">Airbnb · Applied 1 week ago</p>
+<div class="flex gap-2">
+<span class="bg-[#1C2333] text-[#9CA3AF] px-2 py-1 rounded-[4px] font-label-mono text-[11px] uppercase tracking-wide border border-[#374151]">Design</span>
+<span class="bg-[#1C2333] text-[#9CA3AF] px-2 py-1 rounded-[4px] font-label-mono text-[11px] uppercase tracking-wide border border-[#374151]">Tailored</span>
+</div>
+</div>
+</div>
+<div class="flex flex-col items-start lg:items-end flex-shrink-0 min-w-[200px]">
+<div class="flex items-center gap-3 mb-1">
+<div class="font-data-mono text-data-mono flex items-center gap-2">
+<span class="text-accent-amber">58</span>
+<span class="text-[#4B5563] material-symbols-outlined text-[16px]">arrow_right_alt</span>
+<span class="text-accent-emerald">92</span>
+</div>
+<span class="bg-accent-emerald-subtle text-accent-emerald px-2 py-0.5 rounded-full font-label-mono text-[10px] font-bold">+34 pts</span>
+</div>
+<p class="text-[12px] text-[#4B5563] font-body-small">18/20 keywords matched</p>
+</div>
+<div class="flex items-center gap-3 pt-4 lg:pt-0 mt-4 lg:mt-0 border-t border-[#1F2937] lg:border-t-0 w-full lg:w-auto justify-end">
+<button class="ghost-button px-3 py-1.5 rounded-[4px] font-label-mono text-label-mono uppercase">View</button>
+<button class="ghost-button px-3 py-1.5 rounded-[4px] font-label-mono text-label-mono uppercase flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px]">download</span> PDF
+                        </button>
+<button class="text-[#9CA3AF] hover:text-white p-1 ml-2 transition-colors">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="bg-[#111827] border border-[#1F2937] rounded-[8px] p-6 flex flex-col lg:flex-row lg:items-center gap-6 relative group hover:border-[#374151] transition-colors">
+<div class="flex items-start gap-4 flex-1">
+<div class="w-10 h-10 rounded-full bg-[#1C2333] flex items-center justify-center border border-[#374151] shrink-0 text-white font-headline-h3 text-headline-h3">
+                            S
+                        </div>
+<div class="flex flex-col">
+<h3 class="text-[16px] font-bold text-white mb-1">Backend Developer</h3>
+<p class="text-[14px] text-[#9CA3AF] mb-3">Stripe · Applied 2 weeks ago</p>
+<div class="flex gap-2">
+<span class="bg-[#1C2333] text-[#9CA3AF] px-2 py-1 rounded-[4px] font-label-mono text-[11px] uppercase tracking-wide border border-[#374151]">Engineering</span>
+<span class="bg-[#1C2333] text-[#9CA3AF] px-2 py-1 rounded-[4px] font-label-mono text-[11px] uppercase tracking-wide border border-[#374151]">Archived</span>
+</div>
+</div>
+</div>
+<div class="flex flex-col items-start lg:items-end flex-shrink-0 min-w-[200px]">
+<div class="flex items-center gap-3 mb-1">
+<div class="font-data-mono text-data-mono flex items-center gap-2">
+<span class="text-accent-amber">62</span>
+<span class="text-[#4B5563] material-symbols-outlined text-[16px]">arrow_right_alt</span>
+<span class="text-accent-emerald">88</span>
+</div>
+<span class="bg-accent-emerald-subtle text-accent-emerald px-2 py-0.5 rounded-full font-label-mono text-[10px] font-bold">+26 pts</span>
+</div>
+<p class="text-[12px] text-[#4B5563] font-body-small">15/19 keywords matched</p>
+</div>
+<div class="flex items-center gap-3 pt-4 lg:pt-0 mt-4 lg:mt-0 border-t border-[#1F2937] lg:border-t-0 w-full lg:w-auto justify-end">
+<button class="ghost-button px-3 py-1.5 rounded-[4px] font-label-mono text-label-mono uppercase">View</button>
+<button class="ghost-button px-3 py-1.5 rounded-[4px] font-label-mono text-label-mono uppercase flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px]">download</span> PDF
+                        </button>
+<button class="text-[#9CA3AF] hover:text-white p-1 ml-2 transition-colors">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Footer Action -->
+<div class="flex justify-center mt-8">
+<button class="ghost-button px-6 py-2 rounded-[4px] font-label-mono text-label-mono uppercase flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px]">refresh</span>
+                    Load 10 more
+                </button>
+</div>
+<!-- Empty State Reference (Commented out visually, but structurally present for demonstration of prompt requirements) -->
+<!--
+            <div class="mt-16 border-2 border-dashed border-[#1F2937] rounded-[8px] p-12 flex flex-col items-center justify-center text-center bg-[#111827]/50">
+                <div class="w-16 h-16 bg-[#1C2333] rounded-full flex items-center justify-center mb-6">
+                    <span class="material-symbols-outlined text-[32px] text-[#9CA3AF]">description</span>
+                </div>
+                <h3 class="text-[20px] font-bold text-white mb-2">No tailored CVs yet</h3>
+                <p class="text-[#9CA3AF] font-body-base max-w-md mb-8">Start by uploading your master CV and pasting a job description.</p>
+                <button class="bg-[#4F8EF7] text-white px-6 py-3 rounded-[6px] font-label-mono text-label-mono uppercase pulse-glow flex items-center gap-2">
+                    Tailor My First Resume
+                    <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+                </button>
+            </div>
+            -->
+</div>
+</main>
+</body></html>
